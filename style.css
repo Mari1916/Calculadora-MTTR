@@ -50,7 +50,7 @@ button{
     border:none;
     border-radius:6px;
     background:#33cc00;
-    color:white;
+    color:rgb(0, 0, 0);
     font-size:16px;
     cursor:pointer;
 }
