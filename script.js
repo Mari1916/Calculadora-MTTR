@@ -2,18 +2,12 @@ function converterParaSegundos(tempoStr) {
 
     const partes = tempoStr.split(":").map(Number);
 
-    let horas = 0;
     let minutos = 0;
     let segundos = 0;
 
-    if (partes.length === 3) {
-        horas = partes[0];
-        minutos = partes[1];
-        segundos = partes[2];
-    }
-    else if (partes.length === 2) {
-        horas = partes[0];
-        minutos = partes[1];
+    if (partes.length === 2) {
+        minutos = partes[0];
+        segundos = partes[1];
     }
     else if (partes.length === 1) {
         minutos = partes[0];
@@ -22,18 +16,17 @@ function converterParaSegundos(tempoStr) {
         return 0;
     }
 
-    return (horas * 3600) + (minutos * 60) + segundos;
+    return (minutos * 60) + segundos;
 }
 
 function formatarTempo(totalSegundos) {
 
     totalSegundos = Math.round(totalSegundos);
 
-    const horas = Math.floor(totalSegundos / 3600);
-    const minutos = Math.floor((totalSegundos % 3600) / 60);
+    const minutos = Math.floor(totalSegundos / 60);
     const segundos = totalSegundos % 60;
 
-    return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+    return `${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
 }
 
 function calcular() {
