@@ -12,11 +12,11 @@
 
     <h2>Calculadora MTTR e Downtime</h2>
 
-    <label>Tempo Total do Incidente</label>
+    <label>Tempo Total do Incidente (MM:SS)</label>
     <input
         type="text"
         id="tempo"
-        placeholder="Ex: 01:35:20 ou 01:35"
+        placeholder="Ex: 92:14 = 92 min e 14 seg"
     >
 
     <label>Sintoma</label>
@@ -29,9 +29,20 @@
     <button onclick="calcular()">Calcular</button>
 
     <div class="resultado" id="resultado">
-        <p><strong>MTTR:</strong> <span id="mttr"></span></p>
-        <p><strong>Classificação:</strong> <span id="classificacao"></span></p>
-        <p><strong>Downtime:</strong> <span id="downtime"></span></p>
+        <p>
+            <strong>MTTR:</strong>
+            <span id="mttr"></span>
+        </p>
+
+        <p>
+            <strong>Classificação:</strong>
+            <span id="classificacao"></span>
+        </p>
+
+        <p>
+            <strong>Downtime:</strong>
+            <span id="downtime"></span>
+        </p>
     </div>
 
 </div>
