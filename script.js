@@ -1,48 +1,47 @@
-function converterParaSegundos(tempoStr) {
-
-    const partes = tempoStr.split(":").map(Number);
-
-    let minutos = 0;
-    let segundos = 0;
-
-    if (partes.length === 2) {
-        minutos = partes[0];
-        segundos = partes[1];
-    }
-    else if (partes.length === 1) {
-        minutos = partes[0];
-    }
-    else {
-        return 0;
-    }
-
-    return (minutos * 60) + segundos;
-}
-
 function formatarTempo(totalSegundos) {
 
     totalSegundos = Math.round(totalSegundos);
 
-    const minutos = Math.floor(totalSegundos / 60);
+    const horas = Math.floor(totalSegundos / 3600);
+    const minutos = Math.floor((totalSegundos % 3600) / 60);
     const segundos = totalSegundos % 60;
 
-    return `${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+    return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
 }
 
 function calcular() {
 
-    const tempoInformado =
-        document.getElementById("tempo").value.trim();
+    const horaInicio =
+        document.getElementById("horaInicio").value;
+
+    const horaFim =
+        document.getElementById("horaFim").value;
 
     const peso =
         parseFloat(document.getElementById("sintoma").value);
 
-    const tempoTotalSegundos =
-        converterParaSegundos(tempoInformado);
-
-    if (tempoTotalSegundos <= 0) {
-        alert("Informe um tempo válido.");
+    if (!horaInicio || !horaFim) {
+        alert("Informe a hora de início e fim.");
         return;
+    }
+
+    const [inicioHora, inicioMin] =
+        horaInicio.split(":").map(Number);
+
+    const [fimHora, fimMin] =
+        horaFim.split(":").map(Number);
+
+    const inicioSegundos =
+        (inicioHora * 3600) + (inicioMin * 60);
+
+    const fimSegundos =
+        (fimHora * 3600) + (fimMin * 60);
+
+    let tempoTotalSegundos =
+        fimSegundos - inicioSegundos;
+
+    if (tempoTotalSegundos < 0) {
+        tempoTotalSegundos += 24 * 3600;
     }
 
     const downtimeSegundos =
@@ -68,6 +67,9 @@ function calcular() {
     else {
         classificacao = "🔴 Crítico";
     }
+
+    document.getElementById("minutos").innerText =
+        `${Math.round(tempoTotalMinutos)} min`;
 
     document.getElementById("mttr").innerText =
         formatarTempo(tempoTotalSegundos);

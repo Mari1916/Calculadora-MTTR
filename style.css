@@ -15,7 +15,7 @@ body{
 
 .container{
     background:white;
-    width:550px;
+    width:600px;
     padding:30px;
     border-radius:12px;
     box-shadow:0 0 15px rgba(0,0,0,0.1);
@@ -25,6 +25,15 @@ h2{
     text-align:center;
     margin-bottom:25px;
     color:#333;
+}
+
+.linha-horas{
+    display:flex;
+    gap:15px;
+}
+
+.campo{
+    flex:1;
 }
 
 label{
@@ -38,7 +47,7 @@ input,
 select{
     width:100%;
     padding:10px;
-    border:1px solid #000000;
+    border:1px solid #ccc;
     border-radius:6px;
     font-size:16px;
 }
@@ -49,14 +58,14 @@ button{
     padding:12px;
     border:none;
     border-radius:6px;
-    background:#33cc00;
+    background:#13ff13;
     color:rgb(0, 0, 0);
     font-size:16px;
     cursor:pointer;
 }
 
 button:hover{
-    background:#005ea6;
+    background:#008d13;
 }
 
 .resultado{
