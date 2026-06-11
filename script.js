@@ -14,16 +14,10 @@ function formatarTempo(totalSegundos) {
 
     totalSegundos = Math.round(totalSegundos);
 
-    const dias = Math.floor(totalSegundos / 86400);
-    const horas = Math.floor((totalSegundos % 86400) / 3600);
+    const horas = Math.floor(totalSegundos / 3600);
     const minutos = Math.floor((totalSegundos % 3600) / 60);
-    const segundos = totalSegundos % 60;
 
-    if (dias > 0) {
-        return `${dias}d ${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
-    }
-
-    return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+    return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}`;
 }
 
 function calcular() {
