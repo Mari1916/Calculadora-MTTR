@@ -12,26 +12,56 @@
 
     <h2>Calculadora MTTR e Downtime</h2>
 
+    <label class="checkbox-container">
+        <input
+            type="checkbox"
+            id="diasDiferentes"
+            onchange="toggleDatas()"
+        >
+        Incidente ocorreu em dias diferentes
+    </label>
+
+    <div id="camposData" class="campos-data">
+
+        <div class="linha-horas">
+
+            <div class="campo">
+                <label>Data Início</label>
+                <input type="date" id="dataInicio">
+            </div>
+
+            <div class="campo">
+                <label>Data Fim</label>
+                <input type="date" id="dataFim">
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="linha-horas">
+
         <div class="campo">
-            <label for="horaInicio">Hora Início</label>
+            <label>Hora Início</label>
             <input type="time" id="horaInicio">
         </div>
 
         <div class="campo">
-            <label for="horaFim">Hora Fim</label>
+            <label>Hora Fim</label>
             <input type="time" id="horaFim">
         </div>
+
     </div>
 
-    <label for="sintoma">Sintoma</label>
+    <label>Sintoma</label>
+
     <select id="sintoma">
         <option value="1">Indisponibilidade Total</option>
         <option value="0.6">Degradação</option>
         <option value="0.3">Lentidão</option>
     </select>
 
-    <button type="button" onclick="calcular()">
+    <button onclick="calcular()">
         Calcular
     </button>
 
