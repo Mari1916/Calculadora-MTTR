@@ -20,6 +20,18 @@ function formatarTempo(totalSegundos) {
     return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}`;
 }
 
+function formatarDataHora(data) {
+
+    const dia = String(data.getDate()).padStart(2,'0');
+    const mes = String(data.getMonth() + 1).padStart(2,'0');
+    const ano = data.getFullYear();
+
+    const hora = String(data.getHours()).padStart(2,'0');
+    const minuto = String(data.getMinutes()).padStart(2,'0');
+
+    return `${dia}/${mes}/${ano} - ${hora}:${minuto}`;
+}
+
 function calcular() {
 
     const diasDiferentes =
@@ -40,6 +52,8 @@ function calcular() {
     }
 
     let tempoTotalSegundos;
+    let inicioTabela;
+    let fimTabela;
 
     if (diasDiferentes) {
 
@@ -54,40 +68,46 @@ function calcular() {
             return;
         }
 
-        const inicio =
+        inicioTabela =
             new Date(`${dataInicio}T${horaInicio}`);
 
-        const fim =
+        fimTabela =
             new Date(`${dataFim}T${horaFim}`);
 
-        if (fim < inicio) {
+        if (fimTabela < inicioTabela) {
             alert("Data/Hora final menor que a inicial.");
             return;
         }
 
         tempoTotalSegundos =
-            (fim - inicio) / 1000;
+            (fimTabela - inicioTabela) / 1000;
 
     } else {
 
-        const [inicioHora, inicioMin] =
-            horaInicio.split(":").map(Number);
+        const hoje = new Date();
 
-        const [fimHora, fimMin] =
-            horaFim.split(":").map(Number);
+        inicioTabela = new Date();
+        inicioTabela.setHours(
+            Number(horaInicio.split(":")[0]),
+            Number(horaInicio.split(":")[1]),
+            0,
+            0
+        );
 
-        const inicioSegundos =
-            (inicioHora * 3600) + (inicioMin * 60);
+        fimTabela = new Date();
+        fimTabela.setHours(
+            Number(horaFim.split(":")[0]),
+            Number(horaFim.split(":")[1]),
+            0,
+            0
+        );
 
-        const fimSegundos =
-            (fimHora * 3600) + (fimMin * 60);
+        if (fimTabela < inicioTabela) {
+            fimTabela.setDate(fimTabela.getDate() + 1);
+        }
 
         tempoTotalSegundos =
-            fimSegundos - inicioSegundos;
-
-        if (tempoTotalSegundos < 0) {
-            tempoTotalSegundos += 24 * 3600;
-        }
+            (fimTabela - inicioTabela) / 1000;
     }
 
     const downtimeSegundos =
@@ -99,19 +119,19 @@ function calcular() {
     let classificacao = "";
 
     if (tempoTotalMinutos <= 30) {
-        classificacao = "🔵 Excelente";
+        classificacao = "🔵";
     }
     else if (tempoTotalMinutos <= 60) {
-        classificacao = "🟢 Bom";
+        classificacao = "🟢";
     }
     else if (tempoTotalMinutos <= 120) {
-        classificacao = "🟡 Aceitável";
+        classificacao = "🟡";
     }
     else if (tempoTotalMinutos <= 240) {
-        classificacao = "🟠 Atenção";
+        classificacao = "🟠";
     }
     else {
-        classificacao = "🔴 Crítico";
+        classificacao = "🔴";
     }
 
     document.getElementById("minutos").innerText =
@@ -126,6 +146,21 @@ function calcular() {
     document.getElementById("classificacao").innerText =
         classificacao;
 
+    document.getElementById("tblInicio").innerText =
+        formatarDataHora(inicioTabela);
+
+    document.getElementById("tblFim").innerText =
+        formatarDataHora(fimTabela);
+
+    document.getElementById("tblImpacto").innerText =
+        `${Math.round(tempoTotalMinutos)} min`;
+
+    document.getElementById("tblClassificacao").innerText =
+        classificacao;
+
     document.getElementById("resultado").style.display =
+        "block";
+
+    document.getElementById("tabelaContainer").style.display =
         "block";
 }
