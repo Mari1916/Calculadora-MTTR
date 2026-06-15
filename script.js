@@ -147,20 +147,17 @@ function calcular() {
         classificacao;
 
     document.getElementById("tblInicio").innerText =
-        formatarDataHora(inicioTabela);
+    formatarDataHora(inicioTabela);
 
-    document.getElementById("tblFim").innerText =
-        formatarDataHora(fimTabela);
+document.getElementById("tblFim").innerText =
+    formatarDataHora(fimTabela);
 
-    document.getElementById("tblImpacto").innerText =
+document.getElementById("tblImpacto").innerText =
     `${classificacao} ${Math.round(tempoTotalMinutos)} min`;
 
-    document.getElementById("tblClassificacao").innerText =
-        classificacao;
+document.getElementById("resultado").style.display =
+    "block";
 
-    document.getElementById("resultado").style.display =
-        "block";
-
-    document.getElementById("tabelaContainer").style.display =
-        "block";
+document.getElementById("tabelaContainer").style.display =
+    "block";
 }
