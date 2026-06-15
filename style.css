@@ -115,3 +115,14 @@ td{
 tbody tr:hover{
     background:#f8f9fa;
 }
+
+.titulo-secao{
+    margin-top:25px;
+    margin-bottom:10px;
+    background:#f1f3f5;
+    padding:10px;
+    border-radius:6px;
+    color:#444;
+    font-size:15px;
+    font-weight:bold;
+}
