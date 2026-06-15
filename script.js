@@ -98,7 +98,13 @@ function calcular() {
     document.getElementById("tblImpacto").innerText =
         `${classificacao} ${tempoTotalMinutos} min`;
 
+    document.getElementById("tituloPostMortem").style.display =
+        "block";
+
     document.getElementById("resultado").style.display =
+        "block";
+
+    document.getElementById("tituloEmail").style.display =
         "block";
 
     document.getElementById("tabelaContainer").style.display =
