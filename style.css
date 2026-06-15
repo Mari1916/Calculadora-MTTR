@@ -29,22 +29,6 @@ h2{
     color:#00C389;
 }
 
-.checkbox-container{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom:15px;
-    font-weight:bold;
-}
-
-.checkbox-container input{
-    width:auto;
-}
-
-.campos-data{
-    display:none;
-}
-
 .linha-horas{
     display:flex;
     gap:15px;

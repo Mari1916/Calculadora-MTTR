@@ -1,15 +1,3 @@
-function toggleDatas() {
-
-    const checkbox =
-        document.getElementById("diasDiferentes");
-
-    const camposData =
-        document.getElementById("camposData");
-
-    camposData.style.display =
-        checkbox.checked ? "block" : "none";
-}
-
 function formatarTempo(totalSegundos) {
 
     totalSegundos = Math.round(totalSegundos);
@@ -34,8 +22,11 @@ function formatarDataHora(data) {
 
 function calcular() {
 
-    const diasDiferentes =
-        document.getElementById("diasDiferentes").checked;
+    const dataInicio =
+        document.getElementById("dataInicio").value;
+
+    const dataFim =
+        document.getElementById("dataFim").value;
 
     const horaInicio =
         document.getElementById("horaInicio").value;
@@ -46,75 +37,30 @@ function calcular() {
     const peso =
         parseFloat(document.getElementById("sintoma").value);
 
-    if (!horaInicio || !horaFim) {
-        alert("Informe a hora de início e fim.");
+    if (!dataInicio || !dataFim || !horaInicio || !horaFim) {
+        alert("Preencha todos os campos.");
         return;
     }
 
-    let tempoTotalSegundos;
-    let inicioTabela;
-    let fimTabela;
+    const inicio =
+        new Date(`${dataInicio}T${horaInicio}`);
 
-    if (diasDiferentes) {
+    const fim =
+        new Date(`${dataFim}T${horaFim}`);
 
-        const dataInicio =
-            document.getElementById("dataInicio").value;
-
-        const dataFim =
-            document.getElementById("dataFim").value;
-
-        if (!dataInicio || !dataFim) {
-            alert("Informe as datas.");
-            return;
-        }
-
-        inicioTabela =
-            new Date(`${dataInicio}T${horaInicio}`);
-
-        fimTabela =
-            new Date(`${dataFim}T${horaFim}`);
-
-        if (fimTabela < inicioTabela) {
-            alert("Data/Hora final menor que a inicial.");
-            return;
-        }
-
-        tempoTotalSegundos =
-            (fimTabela - inicioTabela) / 1000;
-
-    } else {
-
-        const hoje = new Date();
-
-        inicioTabela = new Date();
-        inicioTabela.setHours(
-            Number(horaInicio.split(":")[0]),
-            Number(horaInicio.split(":")[1]),
-            0,
-            0
-        );
-
-        fimTabela = new Date();
-        fimTabela.setHours(
-            Number(horaFim.split(":")[0]),
-            Number(horaFim.split(":")[1]),
-            0,
-            0
-        );
-
-        if (fimTabela < inicioTabela) {
-            fimTabela.setDate(fimTabela.getDate() + 1);
-        }
-
-        tempoTotalSegundos =
-            (fimTabela - inicioTabela) / 1000;
+    if (fim < inicio) {
+        alert("A data/hora final não pode ser menor que a inicial.");
+        return;
     }
+
+    const tempoTotalSegundos =
+        (fim - inicio) / 1000;
 
     const downtimeSegundos =
         tempoTotalSegundos * peso;
 
     const tempoTotalMinutos =
-        tempoTotalSegundos / 60;
+        Math.round(tempoTotalSegundos / 60);
 
     let classificacao = "";
 
@@ -135,7 +81,7 @@ function calcular() {
     }
 
     document.getElementById("minutos").innerText =
-        `${Math.round(tempoTotalMinutos)} min`;
+        `${tempoTotalMinutos} min`;
 
     document.getElementById("mttr").innerText =
         formatarTempo(tempoTotalSegundos);
@@ -143,21 +89,18 @@ function calcular() {
     document.getElementById("downtime").innerText =
         formatarTempo(downtimeSegundos);
 
-    document.getElementById("classificacao").innerText =
-        classificacao;
-
     document.getElementById("tblInicio").innerText =
-    formatarDataHora(inicioTabela);
+        formatarDataHora(inicio);
 
-document.getElementById("tblFim").innerText =
-    formatarDataHora(fimTabela);
+    document.getElementById("tblFim").innerText =
+        formatarDataHora(fim);
 
-document.getElementById("tblImpacto").innerText =
-    `${classificacao} ${Math.round(tempoTotalMinutos)} min`;
+    document.getElementById("tblImpacto").innerText =
+        `${classificacao} ${tempoTotalMinutos} min`;
 
-document.getElementById("resultado").style.display =
-    "block";
+    document.getElementById("resultado").style.display =
+        "block";
 
-document.getElementById("tabelaContainer").style.display =
-    "block";
+    document.getElementById("tabelaContainer").style.display =
+        "block";
 }
