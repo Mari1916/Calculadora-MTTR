@@ -153,7 +153,7 @@ function calcular() {
         formatarDataHora(fimTabela);
 
     document.getElementById("tblImpacto").innerText =
-        `${Math.round(tempoTotalMinutos)} min`;
+    `${classificacao} ${Math.round(tempoTotalMinutos)} min`;
 
     document.getElementById("tblClassificacao").innerText =
         classificacao;
