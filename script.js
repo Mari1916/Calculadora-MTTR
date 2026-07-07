@@ -3,21 +3,34 @@ function formatarTempo(totalSegundos) {
     totalSegundos = Math.round(totalSegundos);
 
     const horas = Math.floor(totalSegundos / 3600);
+
     const minutos = Math.floor((totalSegundos % 3600) / 60);
 
-    return `${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}`;
+    const segundos = totalSegundos % 60;
+
+    return `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+
 }
 
 function formatarDataHora(data) {
 
-    const dia = String(data.getDate()).padStart(2,'0');
-    const mes = String(data.getMonth() + 1).padStart(2,'0');
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
     const ano = data.getFullYear();
 
-    const hora = String(data.getHours()).padStart(2,'0');
-    const minuto = String(data.getMinutes()).padStart(2,'0');
+    const hora = String(data.getHours()).padStart(2, "0");
+    const minuto = String(data.getMinutes()).padStart(2, "0");
 
     return `${dia}/${mes}/${ano} - ${hora}:${minuto}`;
+
+}
+
+function formatarMinutos(minutos) {
+
+    return Number(minutos.toFixed(1))
+        .toString()
+        .replace(".", ",");
+
 }
 
 function calcular() {
@@ -38,8 +51,10 @@ function calcular() {
         parseFloat(document.getElementById("sintoma").value);
 
     if (!dataInicio || !dataFim || !horaInicio || !horaFim) {
+
         alert("Preencha todos os campos.");
         return;
+
     }
 
     const inicio =
@@ -49,8 +64,10 @@ function calcular() {
         new Date(`${dataFim}T${horaFim}`);
 
     if (fim < inicio) {
+
         alert("A data/hora final não pode ser menor que a inicial.");
         return;
+
     }
 
     const tempoTotalSegundos =
@@ -59,29 +76,40 @@ function calcular() {
     const downtimeSegundos =
         tempoTotalSegundos * peso;
 
+    // Mantém casas decimais
     const tempoTotalMinutos =
-        Math.round(tempoTotalSegundos / 60);
+        tempoTotalSegundos / 60;
 
     let classificacao = "";
 
     if (tempoTotalMinutos <= 30) {
+
         classificacao = "🔵";
+
     }
     else if (tempoTotalMinutos <= 60) {
+
         classificacao = "🟢";
+
     }
     else if (tempoTotalMinutos <= 120) {
+
         classificacao = "🟡";
+
     }
     else if (tempoTotalMinutos <= 240) {
+
         classificacao = "🟠";
+
     }
     else {
+
         classificacao = "🔴";
+
     }
 
     document.getElementById("minutos").innerText =
-        `${tempoTotalMinutos} min`;
+        `${formatarMinutos(tempoTotalMinutos)} min`;
 
     document.getElementById("mttr").innerText =
         formatarTempo(tempoTotalSegundos);
@@ -96,7 +124,7 @@ function calcular() {
         formatarDataHora(fim);
 
     document.getElementById("tblImpacto").innerText =
-        `${classificacao} ${tempoTotalMinutos} min`;
+        `${classificacao} ${formatarMinutos(tempoTotalMinutos)} min`;
 
     document.getElementById("tituloPostMortem").style.display =
         "block";
@@ -109,4 +137,5 @@ function calcular() {
 
     document.getElementById("tabelaContainer").style.display =
         "block";
+
 }
