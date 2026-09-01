@@ -1,102 +1,277 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Calculadora MTTR e Downtime</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h2>Calculadora MTTR e Downtime</h2>
+     <h1 class="titulo-principal">
+        Calculadora MTTR e Downtime
+    </h1>
+
+    <!-- ==========================================
+         DATA INÍCIO E DATA FIM
+    =========================================== -->
 
     <div class="linha-horas">
 
         <div class="campo">
-            <label>Data Início</label>
-            <input type="date" id="dataInicio">
+
+            <label>
+                Data Início
+            </label>
+
+            <input
+                type="date"
+                id="dataInicio"
+            >
+
         </div>
 
+
         <div class="campo">
-            <label>Data Fim</label>
-            <input type="date" id="dataFim">
+
+            <label>
+                Data Fim
+            </label>
+
+            <input
+                type="date"
+                id="dataFim"
+            >
+
         </div>
 
     </div>
+
+
+    <!-- ==========================================
+         HORA INÍCIO E HORA FIM
+    =========================================== -->
 
     <div class="linha-horas">
 
         <div class="campo">
-            <label>Hora Início</label>
-            <input type="time" id="horaInicio">
+
+            <label>
+                Hora Início
+            </label>
+
+            <input
+                type="time"
+                id="horaInicio"
+            >
+
         </div>
 
+
         <div class="campo">
-            <label>Hora Fim</label>
-            <input type="time" id="horaFim">
+
+            <label>
+                Hora Fim
+            </label>
+
+            <input
+                type="time"
+                id="horaFim"
+            >
+
         </div>
 
     </div>
 
-    <label>Sintoma</label>
+
+    <!-- ==========================================
+         APENAS HORAS ÚTEIS
+    =========================================== -->
+
+    <div class="campo-horas-uteis">
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="apenasHorasUteis"
+            >
+
+            Apenas horas úteis
+            (Seg. a Sex., 07:00 às 18:00)
+
+        </label>
+
+    </div>
+
+
+    <!-- ==========================================
+         SINTOMA
+    =========================================== -->
+
+    <label>
+        Sintoma
+    </label>
 
     <select id="sintoma">
-        <option value="1">Indisponibilidade Total</option>
-        <option value="0.6">Degradação</option>
-        <option value="0.3">Lentidão</option>
+
+        <option value="1">
+            Indisponibilidade Total
+        </option>
+
+        <option value="0.6">
+            Degradação
+        </option>
+
+        <option value="0.3">
+            Lentidão
+        </option>
+
     </select>
 
+
+    <!-- ==========================================
+         BOTÃO CALCULAR
+    =========================================== -->
+
     <button onclick="calcular()">
+
         Calcular
+
     </button>
 
-    <h3 class="titulo-secao" id="tituloPostMortem">
+
+    <!-- ==========================================
+         TÍTULO POST MORTEM
+    =========================================== -->
+
+    <h3
+        class="titulo-secao"
+        id="tituloPostMortem"
+    >
+
         Campo para Anexar no Post Mortem
+
     </h3>
 
-    <div class="resultado" id="resultado">
+
+    <!-- ==========================================
+         RESULTADO
+    =========================================== -->
+
+    <div
+        class="resultado"
+        id="resultado"
+    >
 
         <p>
-            <strong>Minutos de Indisponibilidade:</strong>
+
+            <strong>
+                Minutos de Indisponibilidade:
+            </strong>
+
             <span id="minutos"></span>
+
         </p>
 
+
         <p>
-            <strong>MTTR:</strong>
+
+            <strong>
+                MTTR:
+            </strong>
+
             <span id="mttr"></span>
+
         </p>
 
+
         <p>
-            <strong>Downtime:</strong>
+
+            <strong>
+                Downtime:
+            </strong>
+
             <span id="downtime"></span>
+
         </p>
 
     </div>
 
-    <h3 class="titulo-secao" id="tituloEmail">
+
+    <!-- ==========================================
+         TÍTULO E-MAIL
+    =========================================== -->
+
+    <h3
+        class="titulo-secao"
+        id="tituloEmail"
+    >
+
         Campo para Anexar no E-mail
+
     </h3>
 
-    <div class="tabela-container" id="tabelaContainer">
+
+    <!-- ==========================================
+         TABELA
+    =========================================== -->
+
+    <div
+        class="tabela-container"
+        id="tabelaContainer"
+    >
 
         <table>
 
             <thead>
+
                 <tr>
-                    <th>Data e Hora Início</th>
-                    <th>Data e Hora Fim</th>
-                    <th>Tempo de Impacto</th>
+
+                    <th>
+                        Data e Hora Início
+                    </th>
+
+                    <th>
+                        Data e Hora Fim
+                    </th>
+
+                    <th>
+                        Tempo de Impacto
+                    </th>
+
                 </tr>
+
             </thead>
 
+
             <tbody>
+
                 <tr>
+
                     <td id="tblInicio"></td>
+
                     <td id="tblFim"></td>
+
                     <td id="tblImpacto"></td>
+
                 </tr>
+
             </tbody>
 
         </table>
@@ -105,7 +280,15 @@
 
 </div>
 
+
+<!-- ==========================================
+     SCRIPTS
+=========================================== -->
+
+<script src="../../assets/js/auth.js"></script>
+
 <script src="script.js"></script>
 
 </body>
+
 </html>

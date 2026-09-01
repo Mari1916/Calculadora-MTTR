@@ -1,129 +1,219 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ===================================================== RESET ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} /* ===================================================== BODY ===================================================== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+} /* ===================================================== TÍTULO PRINCIPAL ===================================================== */
+.titulo-principal {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #00c389;
+  font-size: 28px;
+  font-weight: bold;
+} /* ===================================================== BOTÃO VOLTAR ===================================================== */
+.home-link {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: #00e676;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(0, 166, 81, 0.18);
+  font-size: 18px;
+  z-index: 1000;
 }
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4f6f9;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:20px;
+.home-link:hover {
+  background: #008845;
+  transform: translateY(-1px);
 }
-
-.container{
-    background:white;
-    width:900px;
-    max-width:100%;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0,0,0,0.1);
+.home-link::before {
+  content: "←";
+} /* ===================================================== CONTAINER ===================================================== */
+.container {
+  background: white;
+  width: 900px;
+  max-width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+} /* ===================================================== TÍTULOS ===================================================== */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #00c389;
+} /* ===================================================== LINHAS DE DATA / HORA ===================================================== */
+.linha-horas {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+} /* ===================================================== CAMPOS ===================================================== */
+.campo {
+  flex: 1;
 }
-
-h2{
-    text-align:center;
-    margin-bottom:25px;
-    color:#00C389;
-}
-
-.linha-horas{
-    display:flex;
-    gap:15px;
-}
-
-.campo{
-    flex:1;
-}
-
-label{
-    display:block;
-    margin-top:15px;
-    margin-bottom:5px;
-    font-weight:bold;
-}
-
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+} /* ===================================================== INPUTS / SELECT ===================================================== */
 input,
-select{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:6px;
-    font-size:16px;
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: white;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
-
-button{
-    width:100%;
-    margin-top:20px;
-    padding:12px;
-    border:none;
-    border-radius:6px;
-    background:linear-gradient(90deg,#00C389,#00D9A3);
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #00c389;
+  box-shadow: 0 0 0 3px rgba(0, 195, 137, 0.12);
+} /* ===================================================== HORAS ÚTEIS ===================================================== */
+.campo-horas-uteis {
+  margin-top: 18px;
+  padding: 12px 15px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+} /* Remove o comportamento padrão do label */
+.campo-horas-uteis label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: normal;
+  color: #333;
+  cursor: pointer;
+} /* Checkbox */
+.campo-horas-uteis input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  accent-color: #00c389;
+} /* Texto auxiliar */
+.campo-horas-uteis label::after {
+  content: "";
+} /* ===================================================== BOTÃO CALCULAR ===================================================== */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #00e676;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
-
-button:hover{
-    transform:translateY(-1px);
+button:hover {
+  transform: translateY(-1px);
+  background: #00d96d;
+} /* ===================================================== TÍTULOS DAS SEÇÕES ===================================================== */
+.titulo-secao {
+  display: none;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  background: #f1f3f5;
+  padding: 10px;
+  border-radius: 6px;
+  color: #444;
+  font-size: 15px;
+  font-weight: bold;
+} /* ===================================================== RESULTADO ===================================================== */
+.resultado {
+  display: none;
+  margin-top: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
 }
-
-.titulo-secao{
-    display:none;
-    margin-top:25px;
-    margin-bottom:10px;
-    background:#f1f3f5;
-    padding:10px;
-    border-radius:6px;
-    color:#444;
-    font-size:15px;
-    font-weight:bold;
+.resultado p {
+  margin: 10px 0;
+  font-size: 16px;
 }
-
-.resultado{
-    display:none;
-    margin-top:10px;
-    padding:15px;
-    border-radius:8px;
-    background:#f8f9fa;
-    border:1px solid #e0e0e0;
+.resultado strong {
+  color: #333;
+} /* ===================================================== TABELA ===================================================== */
+.tabela-container {
+  display: none;
+  margin-top: 10px;
+  overflow-x: auto;
 }
-
-.resultado p{
-    margin:10px 0;
-    font-size:16px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
 }
-
-.tabela-container{
-    display:none;
-    margin-top:10px;
+th {
+  background: #e9ecef;
+  color: #333;
+  border: 1px solid #d6d6d6;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
 }
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:14px;
+td {
+  border: 1px solid #d6d6d6;
+  padding: 12px;
+  text-align: center;
 }
-
-th{
-    background:#e9ecef;
-    color:#333;
-    border:1px solid #d6d6d6;
-    padding:12px;
-    text-align:center;
-    font-weight:bold;
-}
-
-td{
-    border:1px solid #d6d6d6;
-    padding:12px;
-    text-align:center;
-}
-
-tbody tr:hover{
-    background:#f8f9fa;
+tbody tr:hover {
+  background: #f8f9fa;
+} /* ===================================================== RESPONSIVIDADE ===================================================== */
+@media (max-width: 700px) {
+  body {
+    padding: 15px;
+    align-items: flex-start;
+  }
+  .container {
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  .linha-horas {
+    flex-direction: column;
+    gap: 0;
+  }
+  .home-link {
+    top: 15px;
+    left: 15px;
+  }
+} /* ===================================================== RESPONSIVIDADE TABELA ===================================================== */
+@media (max-width: 500px) {
+  th,
+  td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .campo-horas-uteis {
+    padding: 10px;
+  }
 }
